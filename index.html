@@ -59,6 +59,92 @@
       
         
 
+<article id="post-数组去重方法" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/11/30/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E6%96%B9%E6%B3%95/">数组去重方法</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/30/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2019-11-30T07:10:05.743Z" itemprop="datePublished">2019-11-30</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h1 id="数组去重方法"><a href="#数组去重方法" class="headerlink" title="数组去重方法"></a>数组去重方法</h1><p>1、ES6 Set去重  （此方法无法对{}去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>2、<code>...new Set()</code>  去重  （此方法无法对{}去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"> <span class="keyword">var</span> arr1 = [...new <span class="built_in">Set</span>(arr)]</span><br><span class="line"> <span class="built_in">console</span>.log(arr1);</span><br></pre></td></tr></table></figure>
+
+<p>3、对象的属性不能重复的特性 去重</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arrry = [];</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj[arr[i]]) &#123;</span><br><span class="line">            arrry.push(arr[i])</span><br><span class="line">            obj[arr[i]] = <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            obj[arr[i]]++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arrry;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>4、sort (！此方法无法对{} 和 NaN 去重)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    arr = arr.sort()</span><br><span class="line">    <span class="keyword">var</span> arr1 = [arr[<span class="number">0</span>]];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    	<span class="keyword">if</span> (arr[i] !== arr[i - <span class="number">1</span>]) &#123;</span><br><span class="line">    		arr1.push(arr[i]);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>5、js中for循环去重（！此方法无法对{} 和 NaN 去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[i] == arr[j]) &#123;</span><br><span class="line">                arr.splice(j, <span class="number">1</span>);</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"> <span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>6、indexOf去重（！此方法无法对{} 和 NaN 去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr1 = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr1.indexOf(arr[i]) === <span class="number">-1</span>) &#123;</span><br><span class="line">            arr1.push(arr[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>7、递归去重（！此方法无法对{} 和 NaN 去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr1 = arr;          </span><br><span class="line">    arr1.sort(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loop</span>(<span class="params">index</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr1[index] === arr1[index - <span class="number">1</span>]) &#123;</span><br><span class="line">                arr1.splice(index, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            loop(index - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    loop(arr1.length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> arr1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>8、Map去重（！此方法无法对{}  去重）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">     <span class="keyword">let</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>(); <span class="comment">// 数组用于返回结果</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">         <span class="keyword">if</span> (map.has(arr[i])) &#123; <span class="comment">// 如果有该key值</span></span><br><span class="line">             map.set(arr[i], <span class="literal">true</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             map.set(arr[i], <span class="literal">false</span>); <span class="comment">// 如果没有该key值</span></span><br><span class="line">             array.push(arr[i]);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+<p>9、filter去重</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noRepeat</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arr.filter(<span class="function"><span class="keyword">function</span> (<span class="params">item, index, arr</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> arr.indexOf(item, <span class="number">0</span>) === index;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">5</span>, <span class="number">5</span>, <span class="string">'true'</span>, <span class="string">'true'</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="literal">undefined</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>, &#123;&#125;, &#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(noRepeat(arr))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/30/%E6%95%B0%E7%BB%84%E5%8E%BB%E9%87%8D%E6%96%B9%E6%B3%95/" data-id="ck3l8njil00020wqs69jf3q5x"
+         class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-五子棋" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -102,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/23/%E4%BA%94%E5%AD%90%E6%A3%8B/" data-id="ck3l6ju0m0001d4qs570j4lik"
+      <a data-url="http://yoursite.com/2019/11/23/%E4%BA%94%E5%AD%90%E6%A3%8B/" data-id="ck3l8njfd00000wqsho5y1nuu"
          class="article-share-link">Share</a>
       
     </footer>
@@ -174,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/hello-world/" data-id="ck3l6jtzc0000d4qsb4uefioh"
+      <a data-url="http://yoursite.com/2019/11/22/hello-world/" data-id="ck3l8njgb00010wqs1w21auvi"
          class="article-share-link">Share</a>
       
     </footer>
